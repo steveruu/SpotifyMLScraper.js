@@ -1,4 +1,3 @@
-// discord webhook url = https://discord.com/api/webhooks/1046402781696753715/DuBZxciO1pTDRHq3FnEa2EYsMjI1flapP5wsw_VTDNxUh05TPOPZA2TxJnkZJak8taQy
 const puppeteer = require('puppeteer');
 const axios = require('axios');
 require('dotenv').config();
@@ -43,12 +42,13 @@ const artistList = [
   { id: '30ZlxBZfVVt67x1giU0xa4', name: 'Hakalas' }
 ]
 
-const discordWebhookUrl = process.env.DISCORD_WEBHOOK;
+const webhookURL = process.env.DISCORD_WEBHOOK;
 
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
+  // scraping artist data 
   for (const artist of artistList) {
     const url = `https://open.spotify.com/artist/${artist.id}`;
     await page.goto(url);
@@ -69,7 +69,7 @@ const discordWebhookUrl = process.env.DISCORD_WEBHOOK;
   });
 
   // send update date via Discord webhook
-  await axios.post(discordWebhookUrl, {
+  await axios.post(webhookURL, {
     content: `update **${currentDate}:**`
   })
     .then(response => {
@@ -81,8 +81,8 @@ const discordWebhookUrl = process.env.DISCORD_WEBHOOK;
 
   // send the sorted artists data to discord webhook
   for (const artist of artistList) {
-    await axios.post(discordWebhookUrl, {
-      content: `${artist.name} – **${artist.nonParsedListeners}** posluchačů měsíčně`
+    await axios.post(webhookURL, {
+      content: `${artist.name} – **${artist.nonParsedListeners}**posluchačů měsíčně`
     })
       .then(response => {
         console.log('Data sent to Discord webhook.');
