@@ -3,6 +3,13 @@ const puppeteer = require('puppeteer');
 const axios = require('axios');
 require('dotenv').config();
 
+const date = new Date();
+let day = date.getDate();
+let month = date.getMonth() + 1;
+let year = date.getFullYear();
+
+let currentDate = `${day}/${month}/${year}`;
+
 const artistList = [
   {id: '4NOFcRCgjvnRy8nKVGUM0L', name: 'Steveruu'},
   {id: '3GuGHOzPZ0AhH9hK8LqCsK', name: 'JDSLVT'},
@@ -59,11 +66,21 @@ const discordWebhookUrl = process.env.DISCORD_WEBHOOK;
     return b.listeners - a.listeners;
   });
 
-  // Send the sorted artists data to Discord webhook
+  // send update date data
+  await axios.post(discordWebhookUrl, {
+    content: `update **${currentDate}:**`
+  })
+  .then(response => {
+    console.log(`Data ${content} sent to Discord webhook.`);
+  })
+  .catch(error => {
+    console.log(`Error sending data to Discord webhook: ${error}`);
+  });
+
+  // send the sorted artists data to discord webhook
   for (const artist of artistList) {
     await axios.post(discordWebhookUrl, {
-      // content: `${artist.name} – ${artist.listeners} posluchačů měsíčně`
-      content: `**tady steveruu, omlouvam se za tento incident, uz se to vickrat nestane :DDDDD**`
+      content: `${artist.name} – **${artist.listeners}** posluchačů měsíčně`
     })
     .then(response => {
       console.log('Data sent to Discord webhook.');
