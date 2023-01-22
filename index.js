@@ -53,10 +53,16 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
     const url = `https://open.spotify.com/artist/${artist.id}`;
     await page.goto(url);
 
+    // fetching monthly listeners data
     await page.waitForSelector('.Ydwa1P5GkCggtLlSvphs', { visible: true });
-
     const monthlyListeners = await page.evaluate(() => {
       return document.querySelector('.Ydwa1P5GkCggtLlSvphs').textContent;
+    });
+
+    // fetching artist name (not using this at all right now)
+    await page.waitForSelector('.fhrvNw', { visible: true });
+    const fetchedName = await page.evaluate(() => {
+      return document.querySelector('.fhrvNw').textContent;
     });
 
     artist.listeners = parseInt(monthlyListeners.replace(/[^0-9]/g, '')); // da pryc vsechno krome cisel
