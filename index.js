@@ -74,7 +74,7 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
     content: `update **${currentDate}:**`
   })
     .then(response => {
-      console.log(`Data ${content} sent to Discord webhook.`);
+      console.log(`Data sent to Discord webhook.`);
     })
     .catch(error => {
       console.log(`Error sending data to Discord webhook: ${error}`);
