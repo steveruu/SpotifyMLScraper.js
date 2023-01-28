@@ -39,7 +39,8 @@ const artistList = [
   { id: '1hRLNOS6wPhSMLfXVaJk5t', name: 'Akuda' },
   { id: '6UIdgISBaIHMOvWwz4nfP1', name: 'PRASSOZMRD' },
   { id: '569eihmWcdg4HvSPDnjlPn', name: 'Ondrejoda' },
-  { id: '30ZlxBZfVVt67x1giU0xa4', name: 'Hakalas' }
+  { id: '30ZlxBZfVVt67x1giU0xa4', name: 'Hakalas' },
+  { id: '1lc5n2pQ6NFSFcSFTnJUFX', name: 'PHONK CZ/SK' }
 ]
 
 const webhookURL = process.env.DISCORD_WEBHOOK;
