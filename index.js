@@ -11,7 +11,7 @@ let currentDate = `${day}/${month}/${year}`;
 
 const artistList = [
   { id: '4NOFcRCgjvnRy8nKVGUM0L', name: 'Steveruu' },
-  { id: '3GuGHOzPZ0AhH9hK8LqCsK', name: 'JDSLVT' },
+  { id: '3GuGHOzPZ0AhH9hK8LqCsK', name: 'JDSLVT' }, 
   { id: '1NspLfgAsucc39MeTipXNy', name: 'CYREX' },
   { id: '5VW7PyWYrxkuWlzSxic7N2', name: 'HKLS' },
   { id: '3xVvsXvpURgj3zeTYiBtCv', name: 'Valisbeats' },
@@ -35,7 +35,7 @@ const artistList = [
   { id: '0IM0lwjzI0BYaayMweraKT', name: 'Lonnex' },
   { id: '2IIf5hkbIzh1dqhG1T132E', name: 'COBRA 808' },
   { id: '3TTWuZxamiQERzR42VNMS5', name: 'VESUV' },
-  { id: '6JHPfVpbSjecbv3oAOJSov', name: 'DXNTR BXNTR' },
+  { id: '6JHPfVpbSjecbv3oAOJSov', name: 'DXNTBXTHER' },
   { id: '1hRLNOS6wPhSMLfXVaJk5t', name: 'Akuda' },
   { id: '6UIdgISBaIHMOvWwz4nfP1', name: 'PRASSOZMRD' },
   { id: '569eihmWcdg4HvSPDnjlPn', name: 'Ondrejoda' },
@@ -58,12 +58,6 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
     await page.waitForSelector('.Ydwa1P5GkCggtLlSvphs', { visible: true });
     const monthlyListeners = await page.evaluate(() => {
       return document.querySelector('.Ydwa1P5GkCggtLlSvphs').textContent;
-    });
-
-    // fetching artist name (not using this at all right now)
-    await page.waitForSelector('.fhrvNw', { visible: true });
-    const fetchedName = await page.evaluate(() => {
-      return document.querySelector('.fhrvNw').textContent;
     });
 
     artist.listeners = parseInt(monthlyListeners.replace(/[^0-9]/g, '')); // da pryc vsechno krome cisel
