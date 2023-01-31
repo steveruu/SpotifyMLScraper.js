@@ -4,7 +4,7 @@ require('dotenv').config();
 
 const date = new Date();
 let day = date.getDate();
-let month = date.getMonth() + 1;
+let month = date.getMonth() + 1; // wtf
 let year = date.getFullYear();
 
 let currentDate = `${day}/${month}/${year}`;
@@ -51,22 +51,31 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
 
   // scraping artist data 
   for (const artist of artistList) {
-    console.log(`processing artist ${artist}`);
+    console.log(`New artist ${artist}...`);
+    console.log(`Started processing artist ${artist}...`);
+    
     const url = `https://open.spotify.com/artist/${artist.id}`;
     await page.goto(url);
+    
+    console.log(`Loaded ${artist}'s Spotify website...`);
 
     // fetching monthly listeners data
     await page.waitForSelector('.Ydwa1P5GkCggtLlSvphs', { visible: true });
     const monthlyListeners = await page.evaluate(() => {
       return document.querySelector('.Ydwa1P5GkCggtLlSvphs').textContent;
     });
+    console.log(`Fetched ${artist}'s monthly listeners.`);
 
     artist.listeners = parseInt(monthlyListeners.replace(/[^0-9]/g, '')); // da pryc vsechno krome cisel
     artist.nonParsedListeners = monthlyListeners.replace(/[^0-9\s]/g, ''); // da pryc vsechno krome cisel a mezer? should work
   }
 
+  console.log("Successfully fetched all artists.")
+  console.log("Beginning sorting process.")
+
   // sorting artists in artistList[] array by artist.listeners variable
   artistList.sort((a, b) => {
+    console.log("Finished sorting array.");
     return b.listeners - a.listeners;
   });
 
