@@ -51,33 +51,33 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
 
   // scraping artist data 
   for (const artist of artistList) {
-    console.log(`New artist ${artist}...`);
-    console.log(`Started processing artist ${artist}...`);
+    console.log(`New artist ${artist.name}!`);
+    console.log(`Processing artist ${artist.name}...`);
     
     const url = `https://open.spotify.com/artist/${artist.id}`;
     await page.goto(url);
     
-    console.log(`Loaded ${artist}'s Spotify website...`);
+    console.log(`Loading ${artist.name}'s Spotify website...`);
 
     // fetching monthly listeners data
     await page.waitForSelector('.Ydwa1P5GkCggtLlSvphs', { visible: true });
     const monthlyListeners = await page.evaluate(() => {
       return document.querySelector('.Ydwa1P5GkCggtLlSvphs').textContent;
     });
-    console.log(`Fetched ${artist}'s monthly listeners.`);
+    console.log(`Fetching ${artist.name}'s monthly listeners.`);
 
     artist.listeners = parseInt(monthlyListeners.replace(/[^0-9]/g, '')); // da pryc vsechno krome cisel
     artist.nonParsedListeners = monthlyListeners.replace(/[^0-9\s]/g, ''); // da pryc vsechno krome cisel a mezer? should work
   }
 
-  console.log("Successfully fetched all artists.")
-  console.log("Beginning sorting process.")
+  console.log("Successfully fetched all artists, beginning sorting process.")
 
   // sorting artists in artistList[] array by artist.listeners variable
   artistList.sort((a, b) => {
-    console.log("Finished sorting array.");
     return b.listeners - a.listeners;
   });
+  
+  console.log("Finished sorting array."); // tohle mi neskutecne zaspamovalo konzoli XDDD
 
   // send update date via Discord webhook
   await axios.post(webhookURL, {
@@ -96,10 +96,10 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
       content: `${artist.name} – **${artist.nonParsedListeners}**posluchačů měsíčně`
     })
       .then(response => {
-        console.log('Data sent to Discord webhook.');
+        console.log(`${artist.name}'s data sent to Discord webhook.`);
       })
       .catch(error => {
-        console.log(`Error sending data to Discord webhook: ${error}`);
+        console.log(`Error sending ${artist.name}'s data to Discord webhook: ${error}`);
       });
   }
 
