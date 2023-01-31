@@ -51,6 +51,7 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
 
   // scraping artist data 
   for (const artist of artistList) {
+    console.log(`processing artist ${artist}`);
     const url = `https://open.spotify.com/artist/${artist.id}`;
     await page.goto(url);
 
