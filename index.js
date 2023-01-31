@@ -84,7 +84,7 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
     content: `update **${currentDate}:**`
   })
     .then(response => {
-      console.log(`Data sent to Discord webhook.`);
+      console.log(`Update data sent to Discord webhook.`);
     })
     .catch(error => {
       console.log(`Error sending data to Discord webhook: ${error}`);
@@ -103,6 +103,7 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
       });
   }
 
+  console.log("Closing browser.");
   await browser.close();
 })();
 
