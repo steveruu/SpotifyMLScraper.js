@@ -41,7 +41,8 @@ const artistList = [
   { id: '569eihmWcdg4HvSPDnjlPn', name: 'Ondrejoda' },
   { id: '30ZlxBZfVVt67x1giU0xa4', name: 'Hakalas' },
   { id: '1lc5n2pQ6NFSFcSFTnJUFX', name: 'PHONK CZ/SK' },
-  { id: '500spF7xFcONsMI7ha29IQ', name: 'PAXNKOXD' }
+  { id: '500spF7xFcONsMI7ha29IQ', name: 'PAXNKOXD' },
+  { id: '5oqO5h9gUdtVFfj5l3RNOg', name: 'Matěj Syrový' }
 ]
 
 const webhookURL = process.env.DISCORD_WEBHOOK;
@@ -82,7 +83,7 @@ const webhookURL = process.env.DISCORD_WEBHOOK;
 
   // send update date via Discord webhook
   await axios.post(webhookURL, {
-    content: `update **${currentDate}:**`
+    content: `@update **${currentDate}:**`
   })
     .then(response => {
       console.log(`Update data sent to Discord webhook.`);
