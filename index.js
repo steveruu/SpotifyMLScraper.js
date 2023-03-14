@@ -43,7 +43,9 @@ const artistList = [
   { id: '1lc5n2pQ6NFSFcSFTnJUFX', name: 'PHONK CZ/SK' },
   { id: '500spF7xFcONsMI7ha29IQ', name: 'PAXNKOXD' },
   { id: '5oqO5h9gUdtVFfj5l3RNOg', name: 'Matěj Syrový' },
-  { id: '1Ua2qIskijOuQdRMt9rbDq', name: 'SCEPTRUM'}
+  { id: '1Ua2qIskijOuQdRMt9rbDq', name: 'SCEPTRUM'},
+  { id: '4551yzmt7C1DbJkCeaKKpY', name: 'CORXNULL'},
+  { id: '7lv9NFUQpzzuVMseM2XP0p', name: 'Steveruu MAROS'},
 ]
 
 const webhookURL = process.env.DISCORD_WEBHOOK;
